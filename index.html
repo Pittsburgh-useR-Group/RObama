@@ -10,7 +10,7 @@
 
 
 
-<title>RObama | a competition for Pittsburgh’s R programmers</title>
+<title>RObamaa competition for Pittsburgh’s R programmers</title>
 
 
 
@@ -65,17 +65,18 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Can work alone or in a team (recommended) of at most three people.</li>
 <li>Must only use documents we provide. May use a subset of the documents. Submissions employing additional data sources will be disqualified.</li>
 <li>Can use any<span style="font-size:small;"><sup>✭</sup></span> model, ranging from simple <a href="http://blog.codinghorror.com/markov-and-you/">Markov chains</a> to more complicated ones aware of grammar rules and how language actually works.</li>
+<li>Winning individual or team will present on their work.</li>
 <li>Must be respectful and not use this as a platform for hate speech or expressing political views.</li>
 </ul>
-<p><span style="font-size:small;color:dimgray;"><sup>✭</sup> While generating speech via randomly sampled blocks of text from the provided documents is a technically valid approach, albeit not an impressive one, the caveat is that each block must not be longer than one sentence.</span></p>
+<p><span style="font-size:small;color:dimgray;"><sup>✭</sup> While generating speech via randomly sampled blocks of text from the provided documents is, technically, a valid approach (albeit not an impressive one), the caveat is that each block must not be longer than one sentence.</span></p>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
-<p>The documents are available as a <strong>?MB ZIP archive</strong>.</p>
+<p>To train your algorithms, we have prepared 8 text documents containing a selection of Obama’s words from various speeches and interviews. The documents are available as a <a href="https://github.com/Pittsburgh-useR-Group/RObama/blob/master/RObama_Docs.zip?raw=true">82KB ZIP archive</a>.</p>
 </div>
 <div id="submission" class="section level2">
 <h2>Submission</h2>
-<p>Each submission must be emailed to Mikhail Popov (<a href="mailto:mikhail@mpopov.com">mikhail@mpopov.com</a>) by <span style="background-color:yellow;padding:4px;"><strong>11:59pm on May 6th</strong></span> as a <strong>single R script</strong> that, when run, will use the documents we provided (above) to create a <strong>self-contained function</strong> <code>speech</code>. This function must generate a <em>n</em> sentences-long Obama speech.</p>
+<p>Each submission must be emailed to Mikhail Popov (<a href="mailto:mikhail@mpopov.com">mikhail@mpopov.com</a>) by <strong>11:59pm on May 6th</strong> as a <strong>single R script</strong> that, when run, will use the documents we provided (above) to create a <strong>self-contained function</strong> <code>speech</code>. This function must generate a <em>n</em> sentences-long Obama speech.</p>
 <p><code>speech</code> must not rely on any objects outside of it. All objects that are not <code>speech</code> will be removed from the global environment before <code>speech</code> is used to generate text. See <a href="#instructions">instructions below</a> for creating a self-contained function.</p>
 <div id="example" class="section level3">
 <h3>Example</h3>
@@ -101,7 +102,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="prize" class="section level2">
 <h2>Prize</h2>
-<p>To be determined…</p>
+<p>To be announced at a later date…</p>
 <!-- The winning team will present on their work at the next meeting <span style="color:red;">(possibly at Carnegie Mellon if Department of Statistics or Machine Learning can get us a room?)</span> and each team member will receive <span style="color:red;">(possibly signed?)</span> copies of Hadley Wickham's [Advanced R](http://www.crcpress.com/product/isbn/9781466586963) and Winston Chang's [R Graphics Cookbook](http://shop.oreilly.com/product/0636920023135.do). -->
 <hr>
 <h2>
@@ -149,4 +150,3 @@ Instructions for Creating Self-Contained Functions<a name="instructions"> </a>
 
 </body>
 </html>
-
