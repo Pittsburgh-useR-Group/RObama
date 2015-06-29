@@ -1,0 +1,104 @@
+---
+title: "RObama<br><span style='font-size:smaller'>a competition for Pittsburgh's R programmers</span>"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+```{r,echo=FALSE,eval=FALSE}
+install.packages('pryr') # pryr::object_size()
+install.packages('microbenchmark') # microbenchmark
+library(microbenchmark)
+library(magrittr)
+# Using March 18th, 2015 as seed for example
+"2015-03-18" %>% as.POSIXct(format="%Y-%m-%d") %>% as.numeric %>% set.seed
+```
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+speech <- function(n) c("There are only so many shortcuts.","Ultimately, we have to change the law.","And people have to remain focused on that.")
+```
+## Objective
+
+To create a believable President Barack Obama speech generator in R using a selection of his speeches, addresses, and interviews as training data.
+
+## Rules
+
++ Must be a [Pittsburgh useR group](http://www.meetup.com/Pittsburgh-useR-Group/) member to compete, but can collaborate with non-members. (Open to students, teachers, researchers, professionals, and hobbyists.)
++ Can work alone or in a team (recommended) of at most three people.
++ Must only use documents we provide. May use a subset of the documents. Submissions employing additional data sources will be disqualified.
++ Can use any<span style="font-size:small;"><sup>&#10029;</sup></span> model, ranging from simple [Markov chains](http://blog.codinghorror.com/markov-and-you/) to more complicated ones aware of grammar rules and how language actually works.
++ Winning individual or team will present on their work.
++ Must be respectful and not use this as a platform for hate speech or expressing political views.
+
+<span style="font-size:small;color:dimgray;"><sup>&#10029;</sup> While generating speech via randomly sampled blocks of text from the provided documents is, technically, a valid approach (albeit not an impressive one), the caveat is that each block must not be longer than one sentence.</span>
+
+## Data
+
+To train your algorithms, we have prepared 8 text documents containing a selection of Obama's words from various speeches and interviews. The documents are available as a [82KB ZIP archive](https://github.com/Pittsburgh-useR-Group/RObama/blob/master/RObama_Docs.zip?raw=true).
+
+## Submission
+
+Each submission must be emailed to Mikhail Popov (<a href="mailto:mikhail@mpopov.com">mikhail@mpopov.com</a>) by **11:59pm on May 20th** as a **single R script** that, when run, will use the documents we provided (above) to create a **self-contained function** `speech`. This function must generate a *n* sentences-long Obama speech.
+
+`speech` must not rely on any objects outside of it. All objects that are not `speech` will be removed from the global environment before `speech` is used to generate text. See [instructions below](#instructions) for creating a self-contained function.
+
+### Example
+
+```{r,eval=TRUE,tidy=TRUE}
+speech(3)
+```
+
+## Evaluation
+
+The submissions will be evaluated by the Pittsburgh useR group organizers (for **code readability**, **performance**, and **memory usage**) and competing teams (**blind peer review**).
+
+### Weighted Scoring
+
++ **Code Readability (5%)** <br> All submissions will be uploaded to the [Pittsburgh useR group repository on GitHub](https://github.com/Pittsburgh-useR-Group/RObama) for groups members to learn from, so formatting and commenting are important. See Hadley Wickham's [style guide](http://adv-r.had.co.nz/Style.html) for suggestions on writing readable R code.<br><br>**Note**: participants may request to have their submission published anonymously.
+
++ **Training Performance (15%)** <br> We will measure the speed of importing the provided documents, cleaning up and manipulating the data, and training the algorithm.
+
++ **Memory Usage (15%)** <br> A more compact `speech` object will score higher.
+
++ **Data Generative Performance (15%)** <br> We will measure the speed of generating a speech.
+
++ **Blind Peer Review (50%)** <br> The most important deciding factor will be the competing teams themselves. We will generate a short speech using the same seed for each group. Each generated text will be run through a text-to-speech engine and saved as a randomly numbered mp3 file. The audio files will be sent out to the teams who will rank them from least believable to most believable, without knowing which audio file belongs to which team.
+
+## Prize
+
+<a href="http://www.rstudio.com"><img src="https://dl.dropboxusercontent.com/u/72400/RStudio-Logo-Blue-Gradient.png" alt="RStudio is a trademark of RStudio, Inc." style="margin-left:20px;border:none;" align="right"></a> <span style="font-size:12pt;">A one (1) year subscription to <a href="http://www.shinyapps.io" style="color:#428BCA;">shinyapps.io</a> **Standard Edition** (a $1,100 value): Unlimited Applications, 1,000 Active Hours, Authentication, Multiple Instances, and Email Support.</span> <br><br> Runners up will get a variety of prizes, including *Hands-On Programming with R* by Garrett Grolemund.
+
+<p style="font-size:10pt;color:#C3C3C3;text-align:right;">RStudio is a trademark of RStudio, Inc.</p>
+
+<hr>
+
+<h2>Instructions for Creating Self-Contained Functions<a name="instructions">&nbsp;</a></h2>
+
+You can use the following template and accompanying example for creating a function that contains all the data and models it needs:
+
+```{r}
+make <- function(Object1,Object2) {
+  force(Object1)
+  force(Object2)
+  return(function(n=NULL) {
+    obj1 <- get('Object1',environment())
+    obj2 <- get('Object2',environment())
+    str(obj1)
+    str(obj2)
+    ls()
+  })
+}
+```
+
+Let's see it in action:
+
+```{r}
+set.seed(0)
+str(x <- rnorm(10))
+str(y <- rnorm(10))
+speech <- make(x,y)
+rm(x,y,make)
+ls()
+speech()
+```
+
